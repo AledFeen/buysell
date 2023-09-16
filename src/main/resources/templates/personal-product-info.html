@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr/>
+<h4>Подробная информация о товаре</h4>
+<div th:each="img : ${images}">
+    <img th:src="@{/images/{imgId}(imgId=${img.id})}" height="60px"/><br/><br/>
+</div>
+<b>Название товара: </b><span th:text="${product.title}"></span><br/>
+<b>Описание товара: </b><span th:text="${product.description}"></span><br/>
+<b>Цена: </b><span th:text="${product.price}"></span><br/>
+<b>Город: </b><span th:text="${product.city}"></span><br/>
+<b>Автор (UserId): </b><span th:text="${user}"></span></br>
+<b>Автор (CurrentUserId): </b><span th:text="${currentUser}"></span></br>
+<h3>Обновить товар</h3>
+
+<form th:action="@{/personal-product/update/{productId}(productId=${product.id})}" method="post" enctype="multipart/form-data">
+    Название объявления: <input type="text" name="title"/><br/><br/>
+    Описание объявления: <input type="text" name="description"/><br/><br/>
+    Цена: <input type="number" name="price"/><br/><br/>
+    Город: <input type="text" name="city"/><br/><br/>
+    Первая фотография: <input type="file" name="file1"/><br/><br/>
+    Вторая фотография: <input type="file" name="file2"/><br/><br/>
+    Третья фотография: <input type="file" name="file3"/><br/><br/>
+    <input type="submit" value="Изменит"/>
+</form>
+
+<form th:action="@{/product/delete/{productId}(productId=${product.id})}" method="post">
+    <input type="submit" value="Удалить товар"/>
+</form>
+</body>
+</html>

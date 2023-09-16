@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr/>
+<h4>Товары</h4>
+<form th:action="@{/}" method="get">
+    Поиск по названию объявления: <input type="text" name="title"><br/>
+    <input type="submit" value="Поиск"/>
+</form>
+<div th:each="product : ${products}">
+    <div>
+        <p><b th:text="${product.title}"></b> <span th:text="${product.price}"></span> грн. | <a th:href="@{/product/{productId}(productId=${product.id})}">Подробнее...</a></p>
+    </div>
+</div>
+<div th:unless="${products}">
+    <h3>Товаров нет</h3>
+</div>
+
+<hr/>
+
+<h2><a th:href="@{/create}" style="text-decoration: none; color: blue">Добавить товар</a></h2>
+
+</body>
+</html>
